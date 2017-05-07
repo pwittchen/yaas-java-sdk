@@ -1,2 +1,2 @@
-# yaas-java-client
-unofficial YaaS java client, it doesn't cover all yaas features
+# YaaS Java SDK
+unofficial [YaaS](https://yaas.io) Java SDK
