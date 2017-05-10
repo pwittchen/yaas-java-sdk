@@ -1,2 +1,2 @@
-# YaaS Java SDK
-unofficial [YaaS](https://yaas.io) (Hybris as a Service) Java SDK
+# YaaS SDK
+[YaaS](https://yaas.io) (Hybris as a Service) SDK
