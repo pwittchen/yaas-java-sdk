@@ -16,6 +16,7 @@ Contents
 - [Client API](#client-api)
 - [Authorization procedure in YaaS](#authorization-procedure-in-yaas)
 - [Building SDK](#building-sdk)
+- [Building and running example](#building-and-running-example)
 - [Code style](#code-style)
 - [References](#references)
 - [License](#license)
@@ -74,6 +75,15 @@ In order to build `*.jar` file with SDK, call the following command:
 ```
 
 SDK compiled into `*jar` file will be available in `sdk/build/libs/` directory.
+
+Building and running example
+----------------------------
+
+In order to build and run sample app located in the `example` directory, call the following command:
+
+```
+./gradlew clean build run 
+```
 
 Code style
 ----------
