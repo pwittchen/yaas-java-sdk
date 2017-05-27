@@ -3,7 +3,7 @@ YaaS Java SDK
 [YaaS](https://yaas.io) (Hybris as a Service) SDK
 
 This SDK allows to perform authorized requests to the microservices hidden behind YaaS proxy. 
-Please note, this SDK is not an official SAP Hybris project and it does not cover all the features of YaaS.
+Please note, this SDK is not an official SAP Hybris project and it does not cover all the features of YaaS. If you would like to lear more about YaaS, read an article on my blog about [basic usage of YaaS as a proxy for the microservice](http://blog.wittchen.biz.pl/basic-usage-of-yaas-as-a-proxy-for-the-microservice/).
 
 Tech stack of the SDK: Java 8, [Gradle](https://gradle.org/), [OkHttp3](http://square.github.io/okhttp/), [RxJava2](https://github.com/ReactiveX/RxJava) with [Reactive Streams](http://www.reactive-streams.org/), [Gson](https://github.com/google/gson)
 
