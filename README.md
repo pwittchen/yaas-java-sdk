@@ -15,6 +15,7 @@ Contents
 - [Quick start](#quick-start)
 - [Client API](#client-api)
 - [Authorization procedure in YaaS](#authorization-procedure-in-yaas)
+- [Building SDK](#building-sdk)
 - [References](#references)
 - [License](#license)
 
@@ -61,6 +62,17 @@ Authorization procedure of the microservice endpoint is presented in the scheme 
 SDK follows this procedure in each call to the endpoint of the microservice.
 
 ![calling YaaS microservice](img/calling_yaas_microservice_diagram.png)
+
+Building SDK
+------------
+
+In order to build `*.jar` file with SDK, call the following command:
+
+```
+./gradlew jar
+```
+
+SDK compiled into `*jar` file will be available in `sdk/build/libs/` directory.
 
 References
 ----------
