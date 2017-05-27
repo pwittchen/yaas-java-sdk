@@ -16,6 +16,7 @@ Contents
 - [Client API](#client-api)
 - [Authorization procedure in YaaS](#authorization-procedure-in-yaas)
 - [Building SDK](#building-sdk)
+- [Code style](#code-style)
 - [References](#references)
 - [License](#license)
 
@@ -73,6 +74,11 @@ In order to build `*.jar` file with SDK, call the following command:
 ```
 
 SDK compiled into `*jar` file will be available in `sdk/build/libs/` directory.
+
+Code style
+----------
+
+Code style used in the project is called `Square` from Java Code Styles repository by Square available at: https://github.com/square/java-code-styles.
 
 References
 ----------
