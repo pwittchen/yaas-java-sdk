@@ -13,20 +13,20 @@ Quick start
 Exemplary usage of this SDK is as follows:
 
 ```java
-    YaaSProject project = new YaaSProject.Builder()
-        .withClientId("YOUR_CLIENT_ID")
-        .withClientSecret("YOUR_CLIENT_SECRET")
-        .withOrganization("YOUR_ORGANIZATION")
-        .withService("YOUR_SERVICE")
-        .withVersion("v1")
-        .withZone(Zone.EU)
-        .build();
+YaaSProject project = new YaaSProject.Builder()
+    .withClientId("YOUR_CLIENT_ID")
+    .withClientSecret("YOUR_CLIENT_SECRET")
+    .withOrganization("YOUR_ORGANIZATION")
+    .withService("YOUR_SERVICE")
+    .withVersion("v1")
+    .withZone(Zone.EU)
+    .build();
 
-    Client client = new YaaS(project);
+Client client = new YaaS(project);
 
-    client.get("path/to/your/endpoint")
-        .subscribeOn(Schedulers.newThread())
-        .blockingSubscribe(response -> System.out.println(response.body().string()));
+client.get("path/to/your/endpoint")
+    .subscribeOn(Schedulers.newThread())
+    .blockingSubscribe(response -> System.out.println(response.body().string()));
 ```
 
 Client API
@@ -35,11 +35,11 @@ Client API
 `Client` interface supports basic HTTP methods like: `GET`, `POST`, `PUT` & `DELETE`.
 
 ```java
-  Flowable<Response> get(final String path);
-  Flowable<Response> post(final String path, final RequestBody body);
-  Flowable<Response> put(final String path, final RequestBody body);
-  Flowable<Response> delete(final String path, final RequestBody body);
-  Flowable<Response> delete(final String path);
+Flowable<Response> get(final String path);
+Flowable<Response> post(final String path, final RequestBody body);
+Flowable<Response> put(final String path, final RequestBody body);
+Flowable<Response> delete(final String path, final RequestBody body);
+Flowable<Response> delete(final String path);
 ```
 
 References
