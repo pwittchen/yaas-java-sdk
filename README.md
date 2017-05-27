@@ -13,7 +13,8 @@ Example
 Exemplary usage of this SDK is as follows:
 
 ```java
-    YaaSProject project = new YaaSProject.Builder().withClientId("YOUR_CLIENT_ID")
+    YaaSProject project = new YaaSProject.Builder()
+        .withClientId("YOUR_CLIENT_ID")
         .withClientSecret("YOUR_CLIENT_SECRET")
         .withOrganization("YOUR_ORGANIZATION")
         .withService("YOUR_SERVICE")
