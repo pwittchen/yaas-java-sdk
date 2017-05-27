@@ -32,7 +32,7 @@ Exemplary usage of this SDK is as follows:
 Client API
 ----------
 
-`Client` class supports basic HTTP methods like: `GET`, `POST`, `PUT` & `DELETE`.
+`Client` interface supports basic HTTP methods like: `GET`, `POST`, `PUT` & `DELETE`.
 
 ```java
   Flowable<Response> get(final String path);
