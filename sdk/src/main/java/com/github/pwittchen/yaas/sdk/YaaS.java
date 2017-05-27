@@ -22,7 +22,7 @@ public class YaaS implements Client {
     this(project, new YaaSAuthorization(project.zone));
   }
 
-  public YaaS(final YaaSProject project, Authorization authorization) {
+  public YaaS(final YaaSProject project, final Authorization authorization) {
     Preconditions.checkNotNull(project, "project == null");
     Preconditions.checkNotNull(authorization, "authorization == null");
     this.project = project;
