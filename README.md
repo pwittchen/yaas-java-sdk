@@ -76,7 +76,7 @@ In order to build `*.jar` file with SDK, call the following command:
 ./gradlew jar
 ```
 
-SDK compiled into `*jar` file will be available in `sdk/build/libs/` directory.
+SDK compiled into `*.jar` file will be available in `sdk/build/libs/` directory.
 
 Building and running example
 ----------------------------
