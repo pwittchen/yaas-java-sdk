@@ -8,18 +8,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class Main {
   public static void main(String args[]) {
-
     YaaSProject project = new YaaSProject.Builder().withClientId("YOUR_CLIENT_ID")
         .withClientSecret("YOUR_CLIENT_SECRET")
-        .withOrganization("pwittchen")
-        .withService("airqualitypoland")
+        .withOrganization("YOUR_ORGANIZATION")
+        .withService("YOUR_SERVICE")
         .withVersion("v1")
         .withZone(Zone.EU)
         .build();
 
     Client client = new YaaS(project);
 
-    client.get("station/findAll")
+    client.get("path/to/your/endpoint")
         .subscribeOn(Schedulers.newThread())
         .blockingSubscribe(response -> System.out.println(response.body().string()));
 
