@@ -8,6 +8,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class Main {
   public static void main(String args[]) {
+
+    // This is the simplest example of using yaas-java-sdk
+    // Provide your configuration below and start the application
+
     YaaSProject project = new YaaSProject.Builder().withClientId("YOUR_CLIENT_ID")
         .withClientSecret("YOUR_CLIENT_SECRET")
         .withOrganization("YOUR_ORGANIZATION")
