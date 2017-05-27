@@ -7,11 +7,11 @@ import okhttp3.Response;
 public interface Client {
   Flowable<Response> get(final String path);
 
-  Flowable<Response> post(final String endpointPath, final RequestBody body);
+  Flowable<Response> post(final String path, final RequestBody body);
 
-  Flowable<Response> put(final String endpointPath, final RequestBody body);
+  Flowable<Response> put(final String path, final RequestBody body);
 
-  Flowable<Response> delete(final String endpointPath, final RequestBody body);
+  Flowable<Response> delete(final String path, final RequestBody body);
 
-  Flowable<Response> delete(final String endpointPath);
+  Flowable<Response> delete(final String path);
 }

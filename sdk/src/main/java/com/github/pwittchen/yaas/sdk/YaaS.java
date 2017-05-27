@@ -9,6 +9,7 @@ import okhttp3.Response;
  */
 public class YaaS implements Client {
 
+  private final static String URL_FORMAT = "%s/%s/%s/%s";
   private final YaaSAuthorization authorization;
   private final YaaSProject project;
 
@@ -28,12 +29,11 @@ public class YaaS implements Client {
    * This method wraps OkHttp3 response via RxJava2 Observable. Response body can be accessed via
    * string() method performed on the Response object.
    *
-   * @param endpointPath path to the concrete endpoint of the API hidden behind YaaS proxy
+   * @param path path to the concrete endpoint of the API hidden behind YaaS proxy
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> get(final String endpointPath) {
-    return getAccessToken().flatMap(
-        accessToken -> authorization.get(accessToken, createUrl(endpointPath)));
+  @Override public Flowable<Response> get(final String path) {
+    return getAccessToken().flatMap(accessToken -> authorization.get(accessToken, createUrl(path)));
   }
 
   /**
@@ -41,13 +41,13 @@ public class YaaS implements Client {
    * This method wraps OkHttp3 response via RxJava2 Observable. Response body can be accessed via
    * string() method performed on the Response object.
    *
-   * @param endpointPath path to the concrete endpoint of the API hidden behind YaaS proxy
+   * @param path path to the concrete endpoint of the API hidden behind YaaS proxy
    * @param body of the POST request
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> post(final String endpointPath, final RequestBody body) {
+  @Override public Flowable<Response> post(final String path, final RequestBody body) {
     return getAccessToken().flatMap(
-        accessToken -> authorization.post(accessToken, createUrl(endpointPath), body));
+        accessToken -> authorization.post(accessToken, createUrl(path), body));
   }
 
   /**
@@ -55,13 +55,13 @@ public class YaaS implements Client {
    * This method wraps OkHttp3 response via RxJava2 Observable. Response body can be accessed via
    * string() method performed on the Response object.
    *
-   * @param endpointPath path to the concrete endpoint of the API hidden behind YaaS proxy
+   * @param path path to the concrete endpoint of the API hidden behind YaaS proxy
    * @param body of the POST request
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> put(final String endpointPath, final RequestBody body) {
+  @Override public Flowable<Response> put(final String path, final RequestBody body) {
     return getAccessToken().flatMap(
-        accessToken -> authorization.put(accessToken, createUrl(endpointPath), body));
+        accessToken -> authorization.put(accessToken, createUrl(path), body));
   }
 
   /**
@@ -69,13 +69,13 @@ public class YaaS implements Client {
    * This method wraps OkHttp3 response via RxJava2 Observable. Response body can be accessed via
    * string() method performed on the Response object.
    *
-   * @param endpointPath path to the concrete endpoint of the API hidden behind YaaS proxy
+   * @param path path to the concrete endpoint of the API hidden behind YaaS proxy
    * @param body of the POST request
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> delete(final String endpointPath, final RequestBody body) {
+  @Override public Flowable<Response> delete(final String path, final RequestBody body) {
     return getAccessToken().flatMap(
-        accessToken -> authorization.delete(accessToken, createUrl(endpointPath), body));
+        accessToken -> authorization.delete(accessToken, createUrl(path), body));
   }
 
   /**
@@ -83,20 +83,19 @@ public class YaaS implements Client {
    * This method wraps OkHttp3 response via RxJava2 Observable. Response body can be accessed via
    * string() method performed on the Response object.
    *
-   * @param endpointPath path to the concrete endpoint of the API hidden behind YaaS proxy
+   * @param path path to the concrete endpoint of the API hidden behind YaaS proxy
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> delete(final String endpointPath) {
+  @Override public Flowable<Response> delete(final String path) {
     return getAccessToken().flatMap(
-        accessToken -> authorization.delete(accessToken, createUrl(endpointPath)));
+        accessToken -> authorization.delete(accessToken, createUrl(path)));
   }
 
   private Flowable<String> getAccessToken() {
     return authorization.getAccessToken(project.clientId, project.clientSecret);
   }
 
-  private String createUrl(final String endpointPath) {
-    return String.format("%s/%s/%s/%s", project.organization, project.service, project.version,
-        endpointPath);
+  private String createUrl(final String path) {
+    return String.format(URL_FORMAT, project.organization, project.service, project.version, path);
   }
 }
