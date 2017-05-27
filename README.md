@@ -1,6 +1,6 @@
 YaaS Java SDK
 =============
-[YaaS](https://yaas.io) (Hybris as a Service) SDK
+[YaaS](https://yaas.io) (Hybris as a Service) SDK for Java and JVM
 
 ![YaaS, SAP Hybris](img/yaas_sap_hybris.png)
 
