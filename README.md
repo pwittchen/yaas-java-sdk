@@ -42,7 +42,15 @@ Flowable<Response> delete(final String path, final RequestBody body);
 Flowable<Response> delete(final String path);
 ```
 
+Authorization procedure in YaaS
+-------------------------------
+
+Authorization procedure of the microservice endpoint is presented in the scheme below.
+
+![calling YaaS microservice](img/calling_yaas_microservice_diagram.png)
+
 References
 ----------
+- [Basic usage of YaaS as a proxy for the microservice](http://blog.wittchen.biz.pl/basic-usage-of-yaas-as-a-proxy-for-the-microservice/)
 - [SAP Hybris](http://hybris.com/en/)
 - [YaaS](https://yaas.io)
