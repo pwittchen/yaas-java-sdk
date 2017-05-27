@@ -10,7 +10,7 @@ import okhttp3.Response;
 public class YaaS implements Client {
 
   private final static String URL_FORMAT = "%s/%s/%s/%s";
-  private final YaaSAuthorization authorization;
+  private final Authorization authorization;
   private final YaaSProject project;
 
   /**
@@ -19,9 +19,14 @@ public class YaaS implements Client {
    * @param project represents YaaSProject
    */
   public YaaS(final YaaSProject project) {
+    this(project, new YaaSAuthorization(project.zone));
+  }
+
+  public YaaS(final YaaSProject project, Authorization authorization) {
     Preconditions.checkNotNull(project, "project == null");
+    Preconditions.checkNotNull(authorization, "authorization == null");
     this.project = project;
-    this.authorization = new YaaSAuthorization(project.zone);
+    this.authorization = authorization;
   }
 
   /**
