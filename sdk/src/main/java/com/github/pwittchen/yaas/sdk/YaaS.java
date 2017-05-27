@@ -16,12 +16,18 @@ public class YaaS implements Client {
   /**
    * Create an instance of the YaaS object with provided project details.
    *
-   * @param project represents YaaSProject
+   * @param project represents YaaS Project
    */
   public YaaS(final YaaSProject project) {
     this(project, new YaaSAuthorization(project.zone));
   }
 
+  /**
+   * Create an instance of the YaaS object with provided project and authorization details
+   *
+   * @param project represents YaaS Project
+   * @param authorization represents YaaS authorization
+   */
   public YaaS(final YaaSProject project, final Authorization authorization) {
     Preconditions.checkNotNull(project, "project == null");
     Preconditions.checkNotNull(authorization, "authorization == null");
