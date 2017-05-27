@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import java.io.IOException;
+import java.util.Optional;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -51,17 +52,16 @@ public class YaaSAuthorization implements Authorization {
         emitter.onComplete();
       }
 
-      @Override public void onResponse(final Call call, final Response response)
-          throws IOException {
+      @Override public void onResponse(final Call call, final Response response) {
         final ResponseBody body = response.body();
         if (body == null) {
           emitter.onError(new YaaSException("ResponseBody == null"));
         } else {
-          String accessToken = retrieveAccessToken(body);
-          if (accessToken == null || accessToken.isEmpty()) {
-            emitter.onError(new YaaSException("Access Token is empty"));
+          final Optional<String> accessToken = retrieveAccessToken(body);
+          if (accessToken.isPresent()) {
+            emitter.onNext(accessToken.get());
           } else {
-            emitter.onNext(accessToken);
+            emitter.onError(new YaaSException("Access Token is empty"));
           }
         }
         emitter.onComplete();
@@ -84,10 +84,28 @@ public class YaaSAuthorization implements Authorization {
         .build();
   }
 
-  protected String retrieveAccessToken(final ResponseBody responseBody) throws IOException {
-    String body = responseBody.string();
-    YaaSAuthorizationResponse authResponse = gson.fromJson(body, YaaSAuthorizationResponse.class);
-    return authResponse.accessToken;
+  protected Optional<String> retrieveAccessToken(final ResponseBody responseBody) {
+    Optional<String> body = tryToReadBody(responseBody);
+
+    if (!body.isPresent()) {
+      return Optional.empty();
+    }
+
+    YaaSAuthorizationResponse response = gson.fromJson(body.get(), YaaSAuthorizationResponse.class);
+
+    if (response != null && !response.accessToken.isEmpty()) {
+      return Optional.of(response.accessToken);
+    }
+
+    return Optional.empty();
+  }
+
+  private Optional<String> tryToReadBody(ResponseBody responseBody) {
+    try {
+      return Optional.of(responseBody.string());
+    } catch (IOException e) {
+      return Optional.empty();
+    }
   }
 
   @Override public Flowable<Response> get(final String bearer, final String path) {
