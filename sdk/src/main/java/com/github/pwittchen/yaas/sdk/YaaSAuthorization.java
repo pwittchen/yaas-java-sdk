@@ -117,11 +117,13 @@ public class YaaSAuthorization implements Authorization {
     return request(createAuthorizedPostRequest(bearer, path, body));
   }
 
-  @Override public Flowable<Response> put(final String bearer, final String path, final RequestBody body) {
+  @Override
+  public Flowable<Response> put(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedPutRequest(bearer, path, body));
   }
 
-  @Override public Flowable<Response> delete(final String bearer, final String path, final RequestBody body) {
+  @Override
+  public Flowable<Response> delete(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedDeleteRequest(bearer, path, body));
   }
 
