@@ -6,7 +6,7 @@ public enum Zone {
   private static final String API_URL_FORMAT = "https://api.%s.yaas.io/";
   private String url;
 
-  Zone(String name) {
+  Zone(final String name) {
     this.url = String.format(API_URL_FORMAT, name);
   }
 

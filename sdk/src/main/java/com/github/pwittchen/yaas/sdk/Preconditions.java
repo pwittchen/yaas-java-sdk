@@ -5,7 +5,7 @@ public class Preconditions {
   private Preconditions() {
   }
 
-  public static void checkNotNull(Object object, String message) {
+  public static void checkNotNull(final Object object, final String message) {
     if (object == null) {
       throw new IllegalArgumentException(message);
     }

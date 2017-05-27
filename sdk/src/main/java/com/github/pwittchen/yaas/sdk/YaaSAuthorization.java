@@ -100,7 +100,7 @@ public class YaaSAuthorization implements Authorization {
     return Optional.empty();
   }
 
-  private Optional<String> tryToReadBody(ResponseBody responseBody) {
+  private Optional<String> tryToReadBody(final ResponseBody responseBody) {
     try {
       return Optional.of(responseBody.string());
     } catch (IOException e) {
@@ -117,15 +117,15 @@ public class YaaSAuthorization implements Authorization {
     return request(createAuthorizedPostRequest(bearer, path, body));
   }
 
-  @Override public Flowable<Response> put(String bearer, String path, RequestBody body) {
+  @Override public Flowable<Response> put(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedPutRequest(bearer, path, body));
   }
 
-  @Override public Flowable<Response> delete(String bearer, String path, RequestBody body) {
+  @Override public Flowable<Response> delete(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedDeleteRequest(bearer, path, body));
   }
 
-  @Override public Flowable<Response> delete(String bearer, String path) {
+  @Override public Flowable<Response> delete(final String bearer, final String path) {
     return request(createAuthorizedDeleteRequest(bearer, path));
   }
 
@@ -166,7 +166,7 @@ public class YaaSAuthorization implements Authorization {
     return createRequestBuilder(bearer, path).delete().build();
   }
 
-  private Request.Builder createRequestBuilder(String bearer, String path) {
+  private Request.Builder createRequestBuilder(final String bearer, final String path) {
     return new Request.Builder().url((zone.toString().concat(path)))
         .addHeader(CONTENT_TYPE, CONTENT_TYPE_APPLICATION_JSON)
         .addHeader(HEADER_AUTHORIZATION, HEADER_BEARER.concat(SPACE).concat(bearer));
