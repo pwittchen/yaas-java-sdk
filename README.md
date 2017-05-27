@@ -47,6 +47,8 @@ Authorization procedure in YaaS
 
 Authorization procedure of the microservice endpoint is presented in the scheme below.
 
+SDK follows this procedure in each call to the endpoint of the microservice.
+
 ![calling YaaS microservice](img/calling_yaas_microservice_diagram.png)
 
 References
