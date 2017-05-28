@@ -11,6 +11,7 @@ This SDK allows to perform authorized requests to the microservices hidden behin
 Please note, this SDK is not an official SAP Hybris project and it does not cover all the features of YaaS. If you would like to learn more about YaaS, read an article on my blog about [basic usage of YaaS as a proxy for the microservice](http://blog.wittchen.biz.pl/basic-usage-of-yaas-as-a-proxy-for-the-microservice/). Moreover, you can read an article about [Introducing YaaS Java SDK](http://blog.wittchen.biz.pl/introducing-yaas-java-sdk/).
 
 Tech stack of the SDK: Java 8, [Gradle](https://gradle.org/), [OkHttp3](http://square.github.io/okhttp/), [RxJava2](https://github.com/ReactiveX/RxJava) with [Reactive Streams](http://www.reactive-streams.org/), [Gson](https://github.com/google/gson)
+For testing: [JUnit](http://junit.org), [Truth](https://github.com/google/truth) & [Mockito](http://mockito.org/)
 
 Contents
 --------
