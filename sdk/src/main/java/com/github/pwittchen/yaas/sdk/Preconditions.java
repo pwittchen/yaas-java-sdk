@@ -1,5 +1,8 @@
 package com.github.pwittchen.yaas.sdk;
 
+/**
+ * Preconditions utility class
+ */
 public class Preconditions {
 
   private Preconditions() {

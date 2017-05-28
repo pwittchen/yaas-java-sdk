@@ -148,25 +148,58 @@ public class YaaSAuthorization implements Authorization {
     }
   }
 
+  /**
+   * Performs HTTP GET request to the service
+   * @param bearer id (Access Token)
+   * @param path of the endpoint
+   * @return Flowable with the Response
+   */
   @Override public Flowable<Response> get(final String bearer, final String path) {
     return request(createAuthorizedGetRequest(bearer, path));
   }
 
+  /**
+   * Performs HTTP POST request to the service
+   * @param bearer id (Access Token)
+   * @param path of the endpoint
+   * @param body of the request
+   * @return Flowable with the Response
+   */
   @Override
   public Flowable<Response> post(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedPostRequest(bearer, path, body));
   }
 
+  /**
+   * Performs HTTP PUT request to the service
+   * @param bearer id (Access Token)
+   * @param path of the endpoint
+   * @param body of the request
+   * @return Flowable with the Response
+   */
   @Override
   public Flowable<Response> put(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedPutRequest(bearer, path, body));
   }
 
+  /**
+   * Performs HTTP DELETE request to the service
+   * @param bearer id (Access Token)
+   * @param path of the endpoint
+   * @param body of the request
+   * @return Flowable with the Response
+   */
   @Override
   public Flowable<Response> delete(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedDeleteRequest(bearer, path, body));
   }
 
+  /**
+   * Performs HTTP DELETE request to the service
+   * @param bearer id (Access Token)
+   * @param path of the endpoint
+   * @return Flowable with the Response
+   */
   @Override public Flowable<Response> delete(final String bearer, final String path) {
     return request(createAuthorizedDeleteRequest(bearer, path));
   }
