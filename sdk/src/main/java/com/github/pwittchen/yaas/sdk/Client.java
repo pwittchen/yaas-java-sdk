@@ -9,6 +9,7 @@ import okhttp3.Response;
  * expose authorization details.
  */
 public interface Client {
+
   Flowable<Response> get(final String path);
 
   Flowable<Response> post(final String path, final RequestBody body);

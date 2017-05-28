@@ -9,6 +9,7 @@ import okhttp3.Response;
  * requests to the microservice. It's used by the {@link com.github.pwittchen.yaas.sdk.Client}
  */
 public interface Authorization {
+
   Flowable<String> getAccessToken(final String clientId, final String clientSecret);
 
   Flowable<Response> get(final String bearer, final String path);

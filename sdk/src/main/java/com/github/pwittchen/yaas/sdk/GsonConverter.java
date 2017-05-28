@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
  * Converts data from JSON to POJO and backwards using Google Gson library
  */
 public class GsonConverter implements JsonConverter {
+
   private final Gson gson;
 
   public GsonConverter() {

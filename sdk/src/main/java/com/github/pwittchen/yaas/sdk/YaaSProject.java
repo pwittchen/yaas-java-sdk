@@ -4,6 +4,7 @@ package com.github.pwittchen.yaas.sdk;
  * Represents YaaS project, which is defined in the YaaS Builder web app
  */
 public class YaaSProject {
+
   public final Zone zone;
   public final String organization;
   public final String service;

@@ -14,6 +14,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public class YaaSAuthorization implements Authorization {
+
   private static final String BODY_CLIENT_ID = "client_id";
   private static final String BODY_CLIENT_SECRET = "client_secret";
   private static final String BODY_GRANT_TYPE = "grant_type";
@@ -150,6 +151,7 @@ public class YaaSAuthorization implements Authorization {
 
   /**
    * Performs HTTP GET request to the service
+   *
    * @param bearer id (Access Token)
    * @param path of the endpoint
    * @return Flowable with the Response
@@ -160,6 +162,7 @@ public class YaaSAuthorization implements Authorization {
 
   /**
    * Performs HTTP POST request to the service
+   *
    * @param bearer id (Access Token)
    * @param path of the endpoint
    * @param body of the request
@@ -172,6 +175,7 @@ public class YaaSAuthorization implements Authorization {
 
   /**
    * Performs HTTP PUT request to the service
+   *
    * @param bearer id (Access Token)
    * @param path of the endpoint
    * @param body of the request
@@ -184,6 +188,7 @@ public class YaaSAuthorization implements Authorization {
 
   /**
    * Performs HTTP DELETE request to the service
+   *
    * @param bearer id (Access Token)
    * @param path of the endpoint
    * @param body of the request
@@ -196,6 +201,7 @@ public class YaaSAuthorization implements Authorization {
 
   /**
    * Performs HTTP DELETE request to the service
+   *
    * @param bearer id (Access Token)
    * @param path of the endpoint
    * @return Flowable with the Response
