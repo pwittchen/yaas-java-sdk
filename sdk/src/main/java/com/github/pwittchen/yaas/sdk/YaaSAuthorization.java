@@ -84,16 +84,16 @@ public class YaaSAuthorization implements Authorization {
       }
 
       @Override public void onResponse(final Call call, final Response response) {
-        final ResponseBody body = response.body();
-        if (body == null) {
-          emitter.onError(new YaaSException("ResponseBody == null"));
-        } else {
-          final Optional<String> accessToken = retrieveAccessToken(body);
+        final Optional<ResponseBody> body = readResponseBody(response.body());
+        if (body.isPresent()) {
+          final Optional<String> accessToken = retrieveAccessToken(body.get());
           if (accessToken.isPresent()) {
             emitter.onNext(accessToken.get());
           } else {
             emitter.onError(new YaaSException("Access Token is empty"));
           }
+        } else {
+          emitter.onError(new YaaSException("ResponseBody is empty"));
         }
         emitter.onComplete();
       }
@@ -116,7 +116,7 @@ public class YaaSAuthorization implements Authorization {
   }
 
   protected Optional<String> retrieveAccessToken(final ResponseBody responseBody) {
-    Optional<String> body = tryToReadResponseBody(responseBody);
+    Optional<String> body = tryToReadResponseBodyString(responseBody);
 
     if (!body.isPresent()) {
       return Optional.empty();
@@ -132,11 +132,19 @@ public class YaaSAuthorization implements Authorization {
     return Optional.empty();
   }
 
-  private Optional<String> tryToReadResponseBody(final ResponseBody responseBody) {
+  private Optional<String> tryToReadResponseBodyString(final ResponseBody body) {
     try {
-      return Optional.of(responseBody.string());
+      return Optional.of(body.string());
     } catch (IOException e) {
       return Optional.empty();
+    }
+  }
+
+  private Optional<ResponseBody> readResponseBody(final ResponseBody body) {
+    if (body == null) {
+      return Optional.empty();
+    } else {
+      return Optional.of(body);
     }
   }
 
