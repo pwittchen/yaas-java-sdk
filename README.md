@@ -17,7 +17,7 @@ Contents
 - [Quick start](#quick-start)
 - [Client API](#client-api)
 - [Authorization procedure in YaaS](#authorization-procedure-in-yaas)
-- [Building SDK](#building-sdk)
+- [Building the SDK](#building-the-sdk)
 - [Building and running example](#building-and-running-example)
 - [Code style](#code-style)
 - [Static Code Analysis](#static-code-analysis)
@@ -68,8 +68,8 @@ SDK follows this procedure in each call to the endpoint of the microservice.
 
 ![calling YaaS microservice](img/calling_yaas_microservice_diagram.png)
 
-Building SDK
-------------
+Building the SDK
+----------------
 
 In order to build `*.jar` file with SDK, call the following command:
 
