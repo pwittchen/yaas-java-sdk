@@ -3,6 +3,7 @@ package com.github.pwittchen.yaas.sdk;
 import java.io.IOException;
 import java.util.Optional;
 import okhttp3.Call;
+import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -81,5 +82,31 @@ public class YaaSAuthorizationTest {
     assertThat(request.method()).isEqualTo("POST");
     assertThat(request.url().toString()).isEqualTo("https://api.eu.yaas.io/hybris/oauth2/v1/token");
     assertThat(request.headers().value(0)).isEqualTo("application/x-www-form-urlencoded");
+  }
+
+  @Test
+  public void shouldCreateAccessTokenRequestBody() {
+    // given
+    final YaaSAuthorization authorization = new YaaSAuthorization();
+    final String grantTypeName ="grant_type";
+    final String clientIdName = "client_id";
+    final String clientSecretName = "client_secret";
+
+    final String clientCredentials = "client_credentials";
+    final String clientId = "testId";
+    final String clientSecret = "testSecret";
+
+    // when
+    final FormBody body =
+        authorization.createAccessTokenRequestBody(clientId, clientSecret);
+
+    // then
+    assertThat(body.name(0)).isEqualTo(grantTypeName);
+    assertThat(body.name(1)).isEqualTo(clientIdName);
+    assertThat(body.name(2)).isEqualTo(clientSecretName);
+
+    assertThat(body.value(0)).isEqualTo(clientCredentials);
+    assertThat(body.value(1)).isEqualTo(clientId);
+    assertThat(body.value(2)).isEqualTo(clientSecret);
   }
 }
