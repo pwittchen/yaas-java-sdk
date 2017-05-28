@@ -20,8 +20,8 @@ Contents
 - [Building the SDK](#building-the-sdk)
 - [Building and running example](#building-and-running-example)
 - [Tests](#tests)
-- [Code style](#code-style)
 - [Static Code Analysis](#static-code-analysis)
+- [Code style](#code-style)
 - [References](#references)
 - [License](#license)
 
@@ -98,11 +98,6 @@ To run tests, call the following command:
 ./gradlew test
 ```
 
-Code style
-----------
-
-Code style used in the project is called `Square` from Java Code Styles repository by Square available at: https://github.com/square/java-code-styles.
-
 Static Code Analysis
 --------------------
 
@@ -111,6 +106,11 @@ To run Static Code Analysis with CheckStyle, PMD and FindBugs, call the followin
 ```
 ./gradlew check
 ```
+
+Code style
+----------
+
+Code style used in the project is called `Square` from Java Code Styles repository by Square available at: https://github.com/square/java-code-styles.
 
 References
 ----------
