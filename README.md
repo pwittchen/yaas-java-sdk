@@ -12,7 +12,7 @@ Please note, this SDK is not an official SAP Hybris project and it does not cove
 
 Tech stack of the SDK: Java 8, [Gradle](https://gradle.org/), [OkHttp3](http://square.github.io/okhttp/), [RxJava2](https://github.com/ReactiveX/RxJava) with [Reactive Streams](http://www.reactive-streams.org/), [Gson](https://github.com/google/gson)
 
-For testing: [JUnit](http://junit.org), [Truth](https://github.com/google/truth) & [Mockito](http://mockito.org/)
+Unit tests are written with: [JUnit](http://junit.org), [Truth](https://github.com/google/truth) & [Mockito](http://mockito.org/)
 
 Contents
 --------
