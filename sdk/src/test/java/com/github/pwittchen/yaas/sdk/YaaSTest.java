@@ -39,7 +39,7 @@ public class YaaSTest {
     Authorization authorization = mock(Authorization.class);
 
     // when
-    Client client = new YaaS(project, authorization);
+    new YaaS(project, authorization);
 
     // then exception is thrown
   }
@@ -51,7 +51,7 @@ public class YaaSTest {
     Authorization authorization = null;
 
     // when
-    Client client = new YaaS(project, authorization);
+    new YaaS(project, authorization);
 
     // then exception is thrown
   }
