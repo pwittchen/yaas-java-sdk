@@ -22,7 +22,7 @@ public class YaaSProject {
 
   public final Zone zone;
   public final String organization;
-  public final String service;
+  public final String service; // AKA tenant or Project Identifier
   public final String version;
   public final String clientId;
   public final String clientSecret;
