@@ -5,6 +5,8 @@ import java.util.Optional;
 import okhttp3.Call;
 import okhttp3.Headers;
 import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okhttp3.internal.http.RealResponseBody;
 import okio.BufferedSource;
@@ -64,5 +66,20 @@ public class YaaSAuthorizationTest {
     // then
     assertThat(accessToken.isPresent()).isTrue();
     accessToken.ifPresent(token -> assertThat(token).isEqualTo(givenAccessToken));
+  }
+
+  @Test
+  public void shouldCreateAccessTokenRequest() {
+    // given
+    final YaaSAuthorization authorization = new YaaSAuthorization();
+    final RequestBody body = mock(RequestBody.class);
+
+    // when
+    final Request request = authorization.createAccessTokenRequest(body);
+
+    // then
+    assertThat(request.method()).isEqualTo("POST");
+    assertThat(request.url().toString()).isEqualTo("https://api.eu.yaas.io/hybris/oauth2/v1/token");
+    assertThat(request.headers().value(0)).isEqualTo("application/x-www-form-urlencoded");
   }
 }

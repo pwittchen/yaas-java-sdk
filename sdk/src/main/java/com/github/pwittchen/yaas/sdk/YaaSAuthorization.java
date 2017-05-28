@@ -39,7 +39,7 @@ public class YaaSAuthorization implements Authorization {
   private static final String CONTENT_TYPE_APPLICATION_JSON = "application/json";
   private static final String HEADER_AUTHORIZATION = "Authorization";
   private static final String HEADER_BEARER = "Bearer";
-  private static final String OAUTH2_TOKEN_URL = "/hybris/oauth2/v1/token";
+  private static final String OAUTH2_TOKEN_URL = "hybris/oauth2/v1/token";
   private static final String SPACE = " ";
 
   private final Zone zone;
