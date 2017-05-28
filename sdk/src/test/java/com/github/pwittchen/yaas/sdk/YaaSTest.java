@@ -25,7 +25,8 @@ public class YaaSTest {
   @Test
   public void shouldCreateYaaSObject() {
     // given
-    YaaSProject project = mock(YaaSProject.class);
+    YaaSProject project =
+        new YaaSProject(Zone.EU, "org", "service", "v1", "clientId", "clientSecret");
 
     // when
     Client client = new YaaS(project);

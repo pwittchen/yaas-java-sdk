@@ -267,4 +267,16 @@ public class YaaSAuthorization implements Authorization {
         .addHeader(CONTENT_TYPE, CONTENT_TYPE_APPLICATION_JSON)
         .addHeader(HEADER_AUTHORIZATION, HEADER_BEARER.concat(SPACE).concat(bearer));
   }
+
+  public Zone getZone() {
+    return zone;
+  }
+
+  public Call.Factory getClient() {
+    return client;
+  }
+
+  public JsonConverter getJsonConverter() {
+    return jsonConverter;
+  }
 }
