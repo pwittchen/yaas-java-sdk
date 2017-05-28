@@ -1,8 +1,5 @@
 package com.github.pwittchen.yaas.sdk;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import java.io.IOException;
@@ -30,17 +27,51 @@ public class YaaSAuthorization implements Authorization {
   private static final String SPACE = " ";
 
   private final Zone zone;
-  private final OkHttpClient client;
-  private final Gson gson;
+  private final Call.Factory client;
+  private final JsonConverter jsonConverter;
 
-  public YaaSAuthorization(final Zone zone) {
-    this.zone = zone;
-    this.client = new OkHttpClient();
-    this.gson =
-        new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .create();
+  /**
+   * Creates YaaS Authorization object with default Zone.EU
+   */
+  public YaaSAuthorization() {
+    this(Zone.EU);
   }
 
+  /**
+   * Creates YaaS Authorization object
+   *
+   * @param zone of the microservice (EU or US)
+   */
+  public YaaSAuthorization(final Zone zone) {
+    this(zone, new OkHttpClient(), new GsonConverter());
+  }
+
+  /**
+   * Creates YaaS Authorization object
+   *
+   * @param zone of the microservice (EU or US)
+   * @param client Client.Factory interface from OkHttpClient, OkHttpClient class implements it
+   * @param jsonConverter interface for classes performing conversion from JSON to POJO and
+   * backwards
+   */
+  public YaaSAuthorization(final Zone zone, final Call.Factory client,
+      final JsonConverter jsonConverter) {
+    Preconditions.checkNotNull(zone, "zone == null");
+    Preconditions.checkNotNull(client, "client == null");
+    Preconditions.checkNotNull(jsonConverter, "jsonConverter == null");
+    this.zone = zone;
+    this.client = client;
+    this.jsonConverter = jsonConverter;
+  }
+
+  /**
+   * Reads Access Token from the YaaS. Later it can be used as a Bearer in Authorization header for
+   * making secure request to the microservices.
+   *
+   * @param clientId id of the client read from YaaS Builder web app
+   * @param clientSecret secret value of the client read form YaaS Builder web app
+   * @return Flowable wrapping String which is an Access Token (AKA Bearer)
+   */
   @Override
   public Flowable<String> getAccessToken(final String clientId, final String clientSecret) {
     final FormBody requestBody = createAccessTokenRequestBody(clientId, clientSecret);
@@ -85,13 +116,14 @@ public class YaaSAuthorization implements Authorization {
   }
 
   protected Optional<String> retrieveAccessToken(final ResponseBody responseBody) {
-    Optional<String> body = tryToReadBody(responseBody);
+    Optional<String> body = tryToReadResponseBody(responseBody);
 
     if (!body.isPresent()) {
       return Optional.empty();
     }
 
-    YaaSAuthorizationResponse response = gson.fromJson(body.get(), YaaSAuthorizationResponse.class);
+    YaaSAuthorizationResponse response =
+        jsonConverter.fromJson(body.get(), YaaSAuthorizationResponse.class);
 
     if (response != null && !response.accessToken.isEmpty()) {
       return Optional.of(response.accessToken);
@@ -100,7 +132,7 @@ public class YaaSAuthorization implements Authorization {
     return Optional.empty();
   }
 
-  private Optional<String> tryToReadBody(final ResponseBody responseBody) {
+  private Optional<String> tryToReadResponseBody(final ResponseBody responseBody) {
     try {
       return Optional.of(responseBody.string());
     } catch (IOException e) {
