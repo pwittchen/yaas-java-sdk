@@ -19,6 +19,7 @@ Contents
 - [Authorization procedure in YaaS](#authorization-procedure-in-yaas)
 - [Building the SDK](#building-the-sdk)
 - [Building and running example](#building-and-running-example)
+- [Tests](#tests)
 - [Code style](#code-style)
 - [Static Code Analysis](#static-code-analysis)
 - [References](#references)
@@ -86,6 +87,15 @@ In order to build and run sample app located in the `example` directory, call th
 
 ```
 ./gradlew clean build run 
+```
+
+Tests
+-----
+
+To run tests, call the following command:
+
+```
+./gradlew test
 ```
 
 Code style
