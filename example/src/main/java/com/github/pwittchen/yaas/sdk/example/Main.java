@@ -37,8 +37,25 @@ public class Main {
 
     Client client = new YaaS(project);
 
-    client.get("data/getData/5313")
+    client.get("path/to/your/endpoint")
         .doFinally(() -> System.exit(0))
         .subscribe(response -> System.out.println(response.body().string()));
+
+    /*
+
+    // below, we can see another, more realistic example
+    // with custom scheduler and observing on the current thread
+
+    int threads = Runtime.getRuntime().availableProcessors();
+    ExecutorService executorService = Executors.newFixedThreadPool(threads);
+    Scheduler scheduler = Schedulers.from(executorService);
+
+    client.get("path/to/your/endpoint")
+        .doFinally(() -> System.exit(0))
+        .subscribeOn(scheduler)
+        .observeOn(Schedulers.from(Runnable::run))
+        .subscribe(response -> System.out.println(response.body().string()));
+
+    */
   }
 }
