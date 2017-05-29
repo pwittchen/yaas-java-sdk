@@ -100,7 +100,7 @@ public class YaaSAuthorizationTest {
   public void shouldCreateAccessTokenRequestBody() {
     // given
     final YaaSAuthorization authorization = new YaaSAuthorization();
-    final String grantTypeName ="grant_type";
+    final String grantTypeName = "grant_type";
     final String clientIdName = "client_id";
     final String clientSecretName = "client_secret";
 
