@@ -15,8 +15,7 @@
  */
 package com.github.pwittchen.yaas.sdk;
 
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Optional;
 import okhttp3.Call;
@@ -89,31 +88,30 @@ public class YaaSAuthorization implements Authorization {
    * @return Flowable wrapping String which is an Access Token (AKA Bearer)
    */
   @Override
-  public Flowable<String> getAccessToken(final String clientId, final String clientSecret) {
+  public Single<String> getAccessToken(final String clientId, final String clientSecret) {
     final FormBody requestBody = createAccessTokenRequestBody(clientId, clientSecret);
     final Request request = createAccessTokenRequest(requestBody);
 
-    return Flowable.create(emitter -> client.newCall(request).enqueue(new Callback() {
-      @Override public void onFailure(Call call, IOException e) {
-        emitter.onError(e);
-        emitter.onComplete();
-      }
-
-      @Override public void onResponse(final Call call, final Response response) {
-        final Optional<ResponseBody> body = readResponseBody(response.body());
-        if (body.isPresent()) {
-          final Optional<String> accessToken = retrieveAccessToken(body.get());
-          if (accessToken.isPresent()) {
-            emitter.onNext(accessToken.get());
-          } else {
-            emitter.onError(new YaaSException("Access Token is empty"));
+    return Single.create(
+        emitter -> client.newCall(request).enqueue(new Callback() {
+          @Override public void onFailure(Call call, IOException e) {
+            emitter.onError(e);
           }
-        } else {
-          emitter.onError(new YaaSException("ResponseBody is empty"));
-        }
-        emitter.onComplete();
-      }
-    }), BackpressureStrategy.BUFFER);
+
+          @Override public void onResponse(final Call call, final Response response) {
+            final Optional<ResponseBody> body = readResponseBody(response.body());
+            if (body.isPresent()) {
+              final Optional<String> accessToken = retrieveAccessToken(body.get());
+              if (accessToken.isPresent()) {
+                emitter.onSuccess(accessToken.get());
+              } else {
+                emitter.onError(new YaaSException("Access Token is empty"));
+              }
+            } else {
+              emitter.onError(new YaaSException("ResponseBody is empty"));
+            }
+          }
+        }));
   }
 
   protected Request createAccessTokenRequest(final RequestBody requestBody) {
@@ -171,7 +169,7 @@ public class YaaSAuthorization implements Authorization {
    * @param path of the endpoint
    * @return Flowable with the Response
    */
-  @Override public Flowable<Response> get(final String bearer, final String path) {
+  @Override public Single<Response> get(final String bearer, final String path) {
     return request(createAuthorizedGetRequest(bearer, path));
   }
 
@@ -184,7 +182,7 @@ public class YaaSAuthorization implements Authorization {
    * @return Flowable with the Response
    */
   @Override
-  public Flowable<Response> post(final String bearer, final String path, final RequestBody body) {
+  public Single<Response> post(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedPostRequest(bearer, path, body));
   }
 
@@ -197,7 +195,7 @@ public class YaaSAuthorization implements Authorization {
    * @return Flowable with the Response
    */
   @Override
-  public Flowable<Response> put(final String bearer, final String path, final RequestBody body) {
+  public Single<Response> put(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedPutRequest(bearer, path, body));
   }
 
@@ -210,7 +208,7 @@ public class YaaSAuthorization implements Authorization {
    * @return Flowable with the Response
    */
   @Override
-  public Flowable<Response> delete(final String bearer, final String path, final RequestBody body) {
+  public Single<Response> delete(final String bearer, final String path, final RequestBody body) {
     return request(createAuthorizedDeleteRequest(bearer, path, body));
   }
 
@@ -221,22 +219,20 @@ public class YaaSAuthorization implements Authorization {
    * @param path of the endpoint
    * @return Flowable with the Response
    */
-  @Override public Flowable<Response> delete(final String bearer, final String path) {
+  @Override public Single<Response> delete(final String bearer, final String path) {
     return request(createAuthorizedDeleteRequest(bearer, path));
   }
 
-  protected Flowable<Response> request(final Request request) {
-    return Flowable.create(emitter -> client.newCall(request).enqueue(new Callback() {
+  protected Single<Response> request(final Request request) {
+    return Single.create(emitter -> client.newCall(request).enqueue(new Callback() {
       @Override public void onFailure(Call call, IOException e) {
         emitter.onError(e);
-        emitter.onComplete();
       }
 
       @Override public void onResponse(Call call, Response response) throws IOException {
-        emitter.onNext(response);
-        emitter.onComplete();
+        emitter.onSuccess(response);
       }
-    }), BackpressureStrategy.BUFFER);
+    }));
   }
 
   protected Request createAuthorizedGetRequest(final String bearer, final String path) {

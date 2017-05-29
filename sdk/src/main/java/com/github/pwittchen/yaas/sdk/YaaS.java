@@ -15,7 +15,7 @@
  */
 package com.github.pwittchen.yaas.sdk;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
@@ -58,7 +58,7 @@ public class YaaS implements Client {
    * @param path path to the concrete endpoint of the API hidden behind YaaS proxy
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> get(final String path) {
+  @Override public Single<Response> get(final String path) {
     return getAccessToken().flatMap(accessToken -> authorization.get(accessToken, createUrl(path)));
   }
 
@@ -71,7 +71,7 @@ public class YaaS implements Client {
    * @param body of the POST request
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> post(final String path, final RequestBody body) {
+  @Override public Single<Response> post(final String path, final RequestBody body) {
     return getAccessToken().flatMap(
         accessToken -> authorization.post(accessToken, createUrl(path), body));
   }
@@ -85,7 +85,7 @@ public class YaaS implements Client {
    * @param body of the POST request
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> put(final String path, final RequestBody body) {
+  @Override public Single<Response> put(final String path, final RequestBody body) {
     return getAccessToken().flatMap(
         accessToken -> authorization.put(accessToken, createUrl(path), body));
   }
@@ -99,7 +99,7 @@ public class YaaS implements Client {
    * @param body of the POST request
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> delete(final String path, final RequestBody body) {
+  @Override public Single<Response> delete(final String path, final RequestBody body) {
     return getAccessToken().flatMap(
         accessToken -> authorization.delete(accessToken, createUrl(path), body));
   }
@@ -112,12 +112,12 @@ public class YaaS implements Client {
    * @param path path to the concrete endpoint of the API hidden behind YaaS proxy
    * @return Flowable wrapping response object from OkHttp library
    */
-  @Override public Flowable<Response> delete(final String path) {
+  @Override public Single<Response> delete(final String path) {
     return getAccessToken().flatMap(
         accessToken -> authorization.delete(accessToken, createUrl(path)));
   }
 
-  private Flowable<String> getAccessToken() {
+  private Single<String> getAccessToken() {
     return authorization.getAccessToken(project.clientId, project.clientSecret);
   }
 

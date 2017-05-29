@@ -19,7 +19,6 @@ import com.github.pwittchen.yaas.sdk.Client;
 import com.github.pwittchen.yaas.sdk.YaaS;
 import com.github.pwittchen.yaas.sdk.YaaSProject;
 import com.github.pwittchen.yaas.sdk.Zone;
-import io.reactivex.schedulers.Schedulers;
 
 public class Main {
   public static void main(String args[]) {
@@ -27,7 +26,8 @@ public class Main {
     // This is the simplest example of using yaas-java-sdk
     // Provide your configuration below and start the application
 
-    YaaSProject project = new YaaSProject.Builder().withClientId("YOUR_CLIENT_ID")
+    YaaSProject project = new YaaSProject.Builder()
+        .withClientId("YOUR_CLIENT_ID")
         .withClientSecret("YOUR_CLIENT_SECRET")
         .withOrganization("YOUR_ORGANIZATION")
         .withService("YOUR_SERVICE")
@@ -38,9 +38,24 @@ public class Main {
     Client client = new YaaS(project);
 
     client.get("path/to/your/endpoint")
-        .subscribeOn(Schedulers.newThread())
-        .blockingSubscribe(response -> System.out.println(response.body().string()));
+        .doFinally(() -> System.exit(0))
+        .subscribe(response -> System.out.println(response.body().string()));
 
-    System.exit(0);
+    /*
+
+    // below, we can see another, more realistic example
+    // with custom scheduler and observing on the current thread
+
+    int threads = Runtime.getRuntime().availableProcessors();
+    ExecutorService executorService = Executors.newFixedThreadPool(threads);
+    Scheduler scheduler = Schedulers.from(executorService);
+
+    client.get("path/to/your/endpoint")
+        .doFinally(() -> System.exit(0))
+        .subscribeOn(scheduler)
+        .observeOn(Schedulers.from(Runnable::run))
+        .subscribe(response -> System.out.println(response.body().string()));
+
+    */
   }
 }

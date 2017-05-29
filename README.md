@@ -45,8 +45,7 @@ YaaSProject project = new YaaSProject.Builder()
 Client client = new YaaS(project);
 
 client.get("path/to/your/endpoint")
-    .subscribeOn(Schedulers.newThread())
-    .blockingSubscribe(response -> System.out.println(response.body().string()));
+    .subscribe(response -> System.out.println(response.body().string()));
 ```
 
 Client API
@@ -55,11 +54,11 @@ Client API
 `Client` interface supports basic HTTP methods like: `GET`, `POST`, `PUT` & `DELETE`.
 
 ```java
-Flowable<Response> get(final String path);
-Flowable<Response> post(final String path, final RequestBody body);
-Flowable<Response> put(final String path, final RequestBody body);
-Flowable<Response> delete(final String path, final RequestBody body);
-Flowable<Response> delete(final String path);
+Single<Response> get(final String path);
+Single<Response> post(final String path, final RequestBody body);
+Single<Response> put(final String path, final RequestBody body);
+Single<Response> delete(final String path, final RequestBody body);
+Single<Response> delete(final String path);
 ```
 
 Authorization procedure in YaaS
