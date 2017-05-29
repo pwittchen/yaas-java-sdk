@@ -1,4 +1,4 @@
-YaaS Java SDK
+YaaS Java SDK [![Build Status](https://travis-ci.org/pwittchen/yaas-java-sdk.svg?branch=master)](https://travis-ci.org/pwittchen/yaas-java-sdk)
 =============
 [YaaS](https://yaas.io) (Hybris as a Service) SDK for Java and JVM
 
