@@ -16,6 +16,7 @@
 package com.github.pwittchen.yaas.sdk;
 
 import io.reactivex.Single;
+import java.util.Objects;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
@@ -44,8 +45,8 @@ public class YaaS implements Client {
    * @param authorization represents YaaS authorization
    */
   public YaaS(final YaaSProject project, final Authorization authorization) {
-    Preconditions.checkNotNull(project, "project == null");
-    Preconditions.checkNotNull(authorization, "authorization == null");
+    Objects.requireNonNull(project, "project == null");
+    Objects.requireNonNull(authorization, "authorization == null");
     this.project = project;
     this.authorization = authorization;
   }

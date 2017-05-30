@@ -17,6 +17,7 @@ package com.github.pwittchen.yaas.sdk;
 
 import io.reactivex.Single;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -71,9 +72,9 @@ public class YaaSAuthorization implements Authorization {
    */
   public YaaSAuthorization(final Zone zone, final Call.Factory client,
       final JsonConverter jsonConverter) {
-    Preconditions.checkNotNull(zone, "zone == null");
-    Preconditions.checkNotNull(client, "client == null");
-    Preconditions.checkNotNull(jsonConverter, "jsonConverter == null");
+    Objects.requireNonNull(zone, "zone == null");
+    Objects.requireNonNull(client, "client == null");
+    Objects.requireNonNull(jsonConverter, "jsonConverter == null");
     this.zone = zone;
     this.client = client;
     this.jsonConverter = jsonConverter;

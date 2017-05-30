@@ -48,7 +48,7 @@ public class YaaSTest {
     assertThat(client).isNotNull();
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void shouldNotCreateYaaSObjectWhenProjectIsNull() {
     // given
     YaaSProject project = null;
@@ -60,7 +60,7 @@ public class YaaSTest {
     // then exception is thrown
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void shouldNotCreateYaaSObjectWhenAuthorizationIsNull() {
     // given
     YaaSProject project = mock(YaaSProject.class);
