@@ -41,9 +41,9 @@ public enum Zone {
   }
 
   @Override public String toString() {
-    return "Zone{" +
-        "location='" + location + '\'' +
-        ", url='" + url + '\'' +
-        '}';
+    return "Zone{"
+        + "location='" + location + '\''
+        + ", url='" + url + '\''
+        + '}';
   }
 }
