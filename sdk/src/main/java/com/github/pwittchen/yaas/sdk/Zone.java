@@ -23,13 +23,27 @@ public enum Zone {
   EU("eu"), US("us");
 
   private static final String API_URL_FORMAT = "https://api.%s.yaas.io/";
-  private String url;
+
+  private final String name;
+  private final String url;
 
   Zone(final String name) {
+    this.name = name;
     this.url = String.format(API_URL_FORMAT, name);
   }
 
-  @Override public String toString() {
+  public String getName() {
+    return name;
+  }
+
+  public String getUrl() {
     return url;
+  }
+
+  @Override public String toString() {
+    return "Zone{" +
+        "name='" + name + '\'' +
+        ", url='" + url + '\'' +
+        '}';
   }
 }

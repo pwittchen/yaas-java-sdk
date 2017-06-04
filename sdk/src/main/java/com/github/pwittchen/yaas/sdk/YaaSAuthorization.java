@@ -116,7 +116,7 @@ public class YaaSAuthorization implements Authorization {
   }
 
   protected Request createAccessTokenRequest(final RequestBody requestBody) {
-    return new Request.Builder().url(zone.toString().concat(OAUTH2_TOKEN_URL))
+    return new Request.Builder().url(zone.getUrl().concat(OAUTH2_TOKEN_URL))
         .addHeader(CONTENT_TYPE, CONTENT_TYPE_FORM_URLENCODED)
         .post(requestBody)
         .build();
@@ -260,7 +260,7 @@ public class YaaSAuthorization implements Authorization {
   }
 
   private Request.Builder createRequestBuilder(final String bearer, final String path) {
-    return new Request.Builder().url((zone.toString().concat(path)))
+    return new Request.Builder().url((zone.getUrl().concat(path)))
         .addHeader(CONTENT_TYPE, CONTENT_TYPE_APPLICATION_JSON)
         .addHeader(HEADER_AUTHORIZATION, HEADER_BEARER.concat(SPACE).concat(bearer));
   }
