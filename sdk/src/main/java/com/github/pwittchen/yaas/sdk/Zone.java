@@ -24,16 +24,16 @@ public enum Zone {
 
   private static final String API_URL_FORMAT = "https://api.%s.yaas.io/";
 
-  private final String name;
+  private final String location;
   private final String url;
 
-  Zone(final String name) {
-    this.name = name;
-    this.url = String.format(API_URL_FORMAT, name);
+  Zone(final String location) {
+    this.location = location;
+    this.url = String.format(API_URL_FORMAT, location);
   }
 
-  public String getName() {
-    return name;
+  public String getLocation() {
+    return location;
   }
 
   public String getUrl() {
@@ -42,7 +42,7 @@ public enum Zone {
 
   @Override public String toString() {
     return "Zone{" +
-        "name='" + name + '\'' +
+        "location='" + location + '\'' +
         ", url='" + url + '\'' +
         '}';
   }
