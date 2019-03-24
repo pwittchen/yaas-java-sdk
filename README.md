@@ -2,6 +2,8 @@ YaaS Java SDK [![Build Status](https://travis-ci.org/pwittchen/yaas-java-sdk.svg
 =============
 [YaaS](https://yaas.io) (Hybris as a Service) SDK for Java and JVM
 
+This project is **DEPRECATED**. Original YaaS project is no longer maintained.
+
 ![YaaS, SAP Hybris](img/yaas_sap_hybris.png)
 
 Overview
